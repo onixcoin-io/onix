@@ -1,0 +1,6 @@
+usr/local/bin/onix-qt usr/bin
+share/pixmaps/onix32.xpm usr/share/pixmaps
+share/pixmaps/onix16.xpm usr/share/pixmaps
+share/pixmaps/onix128.png usr/share/pixmaps
+debian/onix-qt.desktop usr/share/applications
+debian/onix-qt.protocol usr/share/kde4/services/

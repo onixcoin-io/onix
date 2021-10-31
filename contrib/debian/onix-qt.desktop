@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=0.17.6
+Name=Onix Core
+Comment=Connect to the Onix P2P Network
+Exec=onix-qt %u
+Terminal=false
+Type=Application
+Icon=onix128
+MimeType=x-scheme-handler/onix;
+Categories=Network;
+StartupWMClass=Onix-qt
+Name[en_US]=onix-qt

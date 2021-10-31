@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=0.17.6
+Name=Onix Core Testnet
+Comment=Connect to the Onix P2P Network Testnet
+Exec=onix-qt -testnet %u
+Terminal=false
+Type=Application
+Icon=onixtestnet128
+MimeType=x-scheme-handler/onix;
+Categories=Network;
+StartupWMClass=Onix-qt-testnet
+Name[en_US]=onix-qt-testnet
