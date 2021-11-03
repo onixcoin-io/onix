@@ -171,11 +171,11 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data as of block 76b1e67fcff0fcfd078d499c65494cee4319f256da09f5fdefa574433f7d4e3c (height 709065)
-            0, // * UNIX timestamp of last known number of transactions
-            0, // * total number of transactions between genesis and that timestamp
+            // Data as of block d282832401a02608ee95d7481de4bcc942c8ce3fdfb77ef33a4b7b3050f09703 (height 5050)
+            1635807312, // * UNIX timestamp of last known number of transactions
+            9623, // * total number of transactions between genesis and that timestamp
             //   (the tx=... number in the SetBestChain debug.log lines)
-            0 // * estimated number of transactions per second after that timestamp
+            0.002747935264893 // * estimated number of transactions per second after that timestamp
         };
 
         consensus.nBlocktimeDownscaleFactor = 4;
@@ -291,10 +291,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data as of block 8947ec20d2e17bb48365d50833d6967115ceb2358b13edf99b5624da3f156f37 (height 694595)
-            0,
-            0,
-            0
+            // Data as of block c2e57a5f716d7a80d2590057899c0cca11afa2aabaf54a84413b396d92631847 (height 5050)
+            1635768024,
+            9103,
+            0.002628938715086
         };
 
         consensus.nBlocktimeDownscaleFactor = 4;
