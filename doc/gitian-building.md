@@ -313,8 +313,8 @@ Clone the git repositories for onix and Gitian.
 
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
-git clone https://github.com/onixproject/onix --recursive
-git clone https://github.com/onixproject/gitian.sigs.git
+git clone https://github.com/onixcoin-io/onix --recursive
+git clone https://github.com/onixcoin-io/gitian.sigs.git
 ```
 
 Setting up the Gitian image
@@ -380,7 +380,7 @@ Output from `gbuild` will look something like
     remote: Total 57959 (delta 0), reused 0 (delta 0), pack-reused 57958
     Receiving objects: 100% (57959/57959), 53.76 MiB | 484.00 KiB/s, done.
     Resolving deltas: 100% (41590/41590), done.
-    From https://github.com/onixproject/onix
+    From https://github.com/onixcoin-io/onix
     ... (new tags, new branch etc)
     --- Building for trusty amd64 ---
     Stopping target if it is up
@@ -458,7 +458,7 @@ Then when building, override the remote URLs that gbuild would otherwise pull fr
 ```bash
 
 cd /some/root/path/
-git clone https://github.com/onixproject/onix-detached-sigs.git
+git clone https://github.com/onixcoin-io/onix-detached-sigs.git
 
 BTCPATH=/some/root/path/onix
 SIGPATH=/some/root/path/onix-detached-sigs
@@ -490,5 +490,5 @@ Uploading signatures
 ---------------------
 
 After building and signing you can push your signatures (both the `.assert` and `.assert.sig` files) to the
-[onixproject/gitian.sigs](https://github.com/onixproject/gitian.sigs/) repository, or if that's not possible create a pull
+[onixcoin-io/gitian.sigs](https://github.com/onixcoin-io/gitian.sigs/) repository, or if that's not possible create a pull
 request. You can also mail the files to Jordan Earls (earlz@onixcoin.io) and he will commit them.

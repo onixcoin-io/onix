@@ -29,9 +29,9 @@ packages:
 - "python3-setuptools"
 - "fonts-tuffy"
 remotes:
-- "url": "https://github.com/onixproject/onix.git"
+- "url": "https://github.com/onixcoin-io/onix.git"
   "dir": "onix"
-- "url": "https://github.com/onixproject/cpp-eth-onix.git"
+- "url": "https://github.com/onixcoin-io/cpp-eth-onix.git"
   "dir": "cpp-eth-onix"
 files:
 - "MacOSX10.14.sdk.tar.gz"

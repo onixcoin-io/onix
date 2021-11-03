@@ -38,7 +38,7 @@
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.onixproject.Onix-Qt</string>
+  <string>io.onixcoin.Onix-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
