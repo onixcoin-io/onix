@@ -47,7 +47,7 @@ from the root of the repository.
 
 1. Clone the Onix Core source code:
     ```shell
-    git clone --recursive https://github.com/onixproject/onix.git
+    git clone --recursive https://github.com/onixcoin-io/onix.git
     cd onix
     ```
 

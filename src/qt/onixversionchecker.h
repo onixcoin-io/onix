@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#define ONIX_RELEASES "https://github.com/onixproject/onix/releases"
+#define ONIX_RELEASES "https://github.com/onixcoin-io/onix/releases"
 
 class Version {
 

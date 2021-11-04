@@ -23,7 +23,7 @@ pkg-config
 python37
 gmp
 
-git clone https://github.com/onixproject/onix --recursive
+git clone https://github.com/onixcoin-io/onix --recursive
 ```
 
 See [dependencies.md](dependencies.md) for a complete overview.

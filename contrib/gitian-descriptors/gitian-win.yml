@@ -23,9 +23,9 @@ packages:
 - "ca-certificates"
 - "python3"
 remotes:
-- "url": "https://github.com/onixproject/onix.git"
+- "url": "https://github.com/onixcoin-io/onix.git"
   "dir": "onix"
-- "url": "https://github.com/onixproject/cpp-eth-onix.git"
+- "url": "https://github.com/onixcoin-io/cpp-eth-onix.git"
   "dir": "cpp-eth-onix"
 files: []
 script: |

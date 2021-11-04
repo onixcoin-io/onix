@@ -633,7 +633,7 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/onixproject/onix>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/onixcoin-io/onix>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i").translated, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
