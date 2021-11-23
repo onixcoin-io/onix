@@ -259,9 +259,6 @@ void OptionsModel::Reset()
 
     settings.setValue("fLogEvents", true);
 
-    settings.setValue("fSuperStaking", true);
-    
-
     // Set that this was reset
     settings.setValue("fReset", true);
 

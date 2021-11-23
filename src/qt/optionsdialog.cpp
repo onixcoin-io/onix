@@ -203,7 +203,6 @@ void OptionsDialog::setModel(OptionsModel *_model)
 
     /* Main */
     ui->logEvents->setEnabled(true);
-    ui->superStaking->setEnabled(true);
     connect(ui->prune, &QCheckBox::clicked, this, &OptionsDialog::showRestartWarning);
     connect(ui->prune, &QCheckBox::clicked, this, &OptionsDialog::togglePruneWarning);
     connect(ui->pruneSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &OptionsDialog::showRestartWarning);
