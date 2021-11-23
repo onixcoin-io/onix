@@ -133,22 +133,10 @@ Intro::Intro(QWidget *parent, int64_t blockchain_size_gb, int64_t chain_state_si
     ui->lblExplanation1->setText(ui->lblExplanation1->text()
         .arg(PACKAGE_NAME)
         .arg(m_blockchain_size_gb)
-        .arg(2017)
+        .arg(2021)
         .arg(tr("Onix"))
     );
     ui->lblExplanation2->setText(ui->lblExplanation2->text().arg(PACKAGE_NAME));
-
-    if (gArgs.GetArg("-prune", 0) > 1) { // -prune=1 means enabled, above that it's a size in MiB
-        ui->prune->setChecked(true);
-        ui->prune->setEnabled(false);
-    }
-    ui->prune->setText(tr("Discard blocks after verification, except most recent %1 GB (prune)").arg(m_prune_target_gb));
-    UpdatePruneLabels(ui->prune->isChecked());
-
-    connect(ui->prune, &QCheckBox::toggled, [this](bool prune_checked) {
-        UpdatePruneLabels(prune_checked);
-        UpdateFreeSpaceLabel();
-    });
 
     startThread();
 }
@@ -232,7 +220,6 @@ bool Intro::showIfNeeded(interfaces::Node& node, bool& did_show_intro, bool& pru
         }
 
         // Additional preferences:
-        prune = intro.ui->prune->isChecked();
 
         settings.setValue("strDataDir", dataDir);
         settings.setValue("fReset", false);
@@ -266,9 +253,7 @@ void Intro::setStatus(int status, const QString &message, quint64 bytesAvailable
         ui->freeSpace->setText("");
     } else {
         m_bytes_available = bytesAvailable;
-        if (ui->prune->isEnabled()) {
-            ui->prune->setChecked(m_bytes_available < (m_blockchain_size_gb + m_chain_state_size_gb + 10) * GB_BYTES);
-        }
+
         UpdateFreeSpaceLabel();
     }
     /* Don't allow confirm in ERROR state */
@@ -362,7 +347,6 @@ void Intro::UpdatePruneLabels(bool prune_checked)
         m_required_space_gb = m_prune_target_gb + m_chain_state_size_gb;
         storageRequiresMsg = tr("Approximately %1 GB of data will be stored in this directory.");
     }
-    ui->lblExplanation3->setVisible(prune_checked);
     ui->sizeWarningLabel->setText(
         tr("%1 will download and store a copy of the Onix block chain.").arg(PACKAGE_NAME) + " " +
         storageRequiresMsg.arg(m_required_space_gb) + " " +
