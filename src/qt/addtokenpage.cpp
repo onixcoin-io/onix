@@ -96,7 +96,7 @@ void AddTokenPage::on_confirmButton_clicked()
         tokenInfo.token_name = ui->lineEditTokenName->text().toStdString();
         tokenInfo.token_symbol = ui->lineEditTokenSymbol->text().toStdString();
         tokenInfo.decimals = ui->lineEditDecimals->text().toInt();
-        tokenInfo.sender_address = ui->lineEditSenderAddress->currentText().toStdString();
+        tokenInfo.sender_address = ui->lineEditSenderAddress->currentText().mid(0,34).toStdString();
 
         if(m_model)
         {
@@ -150,10 +150,9 @@ void AddTokenPage::on_updateConfirmButton()
     bool enabled = true;
     int j = ui->lineEditSenderAddress->count();
     for (int i = 0; i < j; i++) {
-        QString sAddress = ui->lineEditSenderAddress->itemText(i);
-        QString sAddressTrim = sAddress.mid(0, 34);
-        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
-        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString sAddress = ui->lineEditSenderAddress->itemText(i).mid(0,34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
+        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
         QString fAddress = sAddressAndLabel.toUtf8().constData();
         QString fAddressRemove = fAddress.remove("()");
         ui->lineEditSenderAddress->setItemText(i,fAddressRemove);

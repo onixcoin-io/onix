@@ -169,7 +169,7 @@ void CallContract::on_callContractClicked()
         // Append params to the list
         ExecRPCCommand::appendParam(lstParams, PARAM_ADDRESS, ui->lineEditContractAddress->text());
         ExecRPCCommand::appendParam(lstParams, PARAM_DATAHEX, toDataHex(func, errorMessage));
-        ExecRPCCommand::appendParam(lstParams, PARAM_SENDER, ui->lineEditSenderAddress->currentText());
+        ExecRPCCommand::appendParam(lstParams, PARAM_SENDER, ui->lineEditSenderAddress->currentText().mid(0,34));
 
         // Execute RPC command line
         if(errorMessage.isEmpty() && m_execRPCCommand->exec(m_model->node(), m_model, lstParams, result, resultJson, errorMessage))
@@ -196,10 +196,9 @@ void CallContract::on_updateCallContractButton()
     bool enabled = func != -1;
     int j = ui->lineEditSenderAddress->count();
     for (int i = 0; i < j; i++) {
-        QString sAddress = ui->lineEditSenderAddress->itemText(i);
-        QString sAddressTrim = sAddress.mid(0, 34);
-        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
-        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString sAddress = ui->lineEditSenderAddress->itemText(i).mid(0,34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
+        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
         QString fAddress = sAddressAndLabel.toUtf8().constData();
         QString fAddressRemove = fAddress.remove("()");
         ui->lineEditSenderAddress->setItemText(i,fAddressRemove);

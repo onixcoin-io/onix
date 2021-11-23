@@ -173,10 +173,9 @@ void AddDelegationPage::show()
     ui->lineEditStakerName->setFocus();
     int j = ui->lineEditAddress->count();
     for (int i = 0; i < j; i++) {
-        QString sAddress = ui->lineEditAddress->itemText(i);
-        QString sAddressTrim = sAddress.mid(0, 34);
-        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
-        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString sAddress = ui->lineEditAddress->itemText(i).mid(0,34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
+        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
         QString fAddress = sAddressAndLabel.toUtf8().constData();
         QString fAddressRemove = fAddress.remove("()");
         ui->lineEditAddress->setItemText(i,fAddressRemove);
@@ -204,7 +203,7 @@ void AddDelegationPage::on_addDelegationClicked()
         int unit = BitcoinUnits::BTC;
         uint64_t gasLimit = ui->lineEditGasLimit->value();
         CAmount gasPrice = ui->lineEditGasPrice->value();
-        QString delegateAddress = ui->lineEditAddress->currentText();
+        QString delegateAddress = ui->lineEditAddress->currentText().mid(0,34);
         QString stakerAddress = ui->lineEditStakerAddress->text();
         QString stakerName = ui->lineEditStakerName->text().trimmed();
         int stakerFee = ui->spinBoxFee->value();
