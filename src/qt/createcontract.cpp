@@ -18,6 +18,7 @@
 #include <qt/sendcoinsdialog.h>
 #include <qt/styleSheet.h>
 #include <interfaces/node.h>
+#include <qt/addresstablemodel.h>
 
 #include <QRegularExpressionValidator>
 
@@ -89,6 +90,7 @@ CreateContract::CreateContract(const PlatformStyle *platformStyle, QWidget *pare
     connect(ui->pushButtonClearAll, &QPushButton::clicked, this, &CreateContract::on_clearAllClicked);
     connect(ui->pushButtonCreateContract, &QPushButton::clicked, this, &CreateContract::on_createContractClicked);
     connect(ui->textEditBytecode, &QValidatedTextEdit::textChanged, this, &CreateContract::on_updateCreateButton);
+    connect(ui->lineEditSenderAddress, &QComboBox::currentTextChanged, this,&CreateContract::on_updateCreateButton);
     connect(ui->textEditInterface, &QValidatedTextEdit::textChanged, this, &CreateContract::on_newContractABI);
     connect(ui->stackedWidget, &QStackedWidget::currentChanged, this, &CreateContract::on_updateCreateButton);
 
@@ -240,6 +242,16 @@ void CreateContract::on_gasInfoChanged(quint64 blockGasLimit, quint64 minGasPric
 void CreateContract::on_updateCreateButton()
 {
     bool enabled = true;
+    int j = ui->lineEditSenderAddress->count();
+    for (int i = 0; i < j; i++) {
+        QString sAddress = ui->lineEditSenderAddress->itemText(i);
+        QString sAddressTrim = sAddress.mid(0, 34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
+        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString fAddress = sAddressAndLabel.toUtf8().constData();
+        QString fAddressRemove = fAddress.remove("()");
+        ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
+    }
     if(ui->textEditBytecode->toPlainText().isEmpty())
     {
         enabled = false;

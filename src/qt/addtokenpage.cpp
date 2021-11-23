@@ -148,6 +148,16 @@ void AddTokenPage::on_addressChanged()
 void AddTokenPage::on_updateConfirmButton()
 {
     bool enabled = true;
+    int j = ui->lineEditSenderAddress->count();
+    for (int i = 0; i < j; i++) {
+        QString sAddress = ui->lineEditSenderAddress->itemText(i);
+        QString sAddressTrim = sAddress.mid(0, 34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
+        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString fAddress = sAddressAndLabel.toUtf8().constData();
+        QString fAddressRemove = fAddress.remove("()");
+        ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
+    }
     if(ui->lineEditTokenName->text().isEmpty())
     {
         enabled = false;
