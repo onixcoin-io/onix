@@ -233,7 +233,7 @@ void SendToContract::on_sendToContractClicked()
         ExecRPCCommand::appendParam(lstParams, PARAM_AMOUNT, amount);
         ExecRPCCommand::appendParam(lstParams, PARAM_GASLIMIT, QString::number(gasLimit));
         ExecRPCCommand::appendParam(lstParams, PARAM_GASPRICE, BitcoinUnits::format(unit, gasPrice, false, BitcoinUnits::separatorNever));
-        ExecRPCCommand::appendParam(lstParams, PARAM_SENDER, ui->lineEditSenderAddress->currentText());
+        ExecRPCCommand::appendParam(lstParams, PARAM_SENDER, ui->lineEditSenderAddress->currentText().mid(0,34));
 
         QString questionString = tr("Are you sure you want to send to the contract: <br /><br />");
         questionString.append(tr("<b>%1</b>?")
@@ -278,10 +278,9 @@ void SendToContract::on_updateSendToContractButton()
     int func = m_ABIFunctionField->getSelectedFunction();
     int j = ui->lineEditSenderAddress->count();
     for (int i = 0; i < j; i++) {
-        QString sAddress = ui->lineEditSenderAddress->itemText(i);
-        QString sAddressTrim = sAddress.mid(0, 34);
-        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
-        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString sAddress = ui->lineEditSenderAddress->itemText(i).mid(0,34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
+        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
         QString fAddress = sAddressAndLabel.toUtf8().constData();
         QString fAddressRemove = fAddress.remove("()");
         ui->lineEditSenderAddress->setItemText(i,fAddressRemove);

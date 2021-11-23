@@ -55,10 +55,9 @@ void AddSuperStakerPage::show()
     ui->lineEditStakerName->setFocus();
     int j = ui->lineEditStakerAddress->count();
     for (int i = 0; i < j; i++) {
-        QString sAddress = ui->lineEditStakerAddress->itemText(i);
-        QString sAddressTrim = sAddress.mid(0, 34);
-        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
-        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString sAddress = ui->lineEditStakerAddress->itemText(i).mid(0,34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
+        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
         QString fAddress = sAddressAndLabel.toUtf8().constData();
         QString fAddressRemove = fAddress.remove("()");
         ui->lineEditStakerAddress->setItemText(i,fAddressRemove);
@@ -98,7 +97,7 @@ void AddSuperStakerPage::on_addSuperStakerButton_clicked()
             QMessageBox::information(this, tr("Super staking"), tr("Enable super staking from the option menu in order to start the super staker."));
         }
 
-        QString stakerAddress = ui->lineEditStakerAddress->currentText();
+        QString stakerAddress = ui->lineEditStakerAddress->currentText().mid(0,34);
 
         // Check if super staker exist in the wallet
         if(m_model->wallet().existSuperStaker(stakerAddress.toStdString()))
