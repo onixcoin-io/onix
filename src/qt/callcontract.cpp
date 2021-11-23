@@ -16,6 +16,7 @@
 #include <qt/styleSheet.h>
 #include <qt/guiutil.h>
 #include <QClipboard>
+#include <qt/addresstablemodel.h>
 
 namespace CallContract_NS
 {
@@ -58,7 +59,6 @@ CallContract::CallContract(const PlatformStyle *platformStyle, QWidget *parent) 
     ui->labelSenderAddress->setToolTip(tr("The sender address hex string."));
     ui->pushButtonCallContract->setEnabled(false);
     ui->lineEditSenderAddress->setSenderAddress(true);
-    ui->lineEditSenderAddress->setComboBoxEditable(true);
 
     m_tabInfo = new TabBarInfo(ui->stackedWidget);
     m_tabInfo->addTab(0, tr("Call Contract"));
@@ -85,6 +85,7 @@ CallContract::CallContract(const PlatformStyle *platformStyle, QWidget *parent) 
     connect(ui->loadInfoButton, &QToolButton::clicked, this, &CallContract::on_loadInfoClicked);
     connect(ui->pasteAddressButton, &QToolButton::clicked, this, &CallContract::on_pasteAddressClicked);
     connect(ui->lineEditContractAddress, &QValidatedLineEdit::textChanged, this, &CallContract::on_contractAddressChanged);
+    connect(ui->lineEditSenderAddress, &QComboBox::currentTextChanged, this,&CallContract::on_updateCallContractButton);
 
     // Set contract address validator
     QRegularExpression regEx;
@@ -193,6 +194,16 @@ void CallContract::on_updateCallContractButton()
 {
     int func = m_ABIFunctionField->getSelectedFunction();
     bool enabled = func != -1;
+    int j = ui->lineEditSenderAddress->count();
+    for (int i = 0; i < j; i++) {
+        QString sAddress = ui->lineEditSenderAddress->itemText(i);
+        QString sAddressTrim = sAddress.mid(0, 34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
+        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString fAddress = sAddressAndLabel.toUtf8().constData();
+        QString fAddressRemove = fAddress.remove("()");
+        ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
+    }
     if(ui->lineEditContractAddress->text().isEmpty())
     {
         enabled = false;

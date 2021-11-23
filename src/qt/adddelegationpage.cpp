@@ -11,6 +11,8 @@
 #include <qt/rpcconsole.h>
 #include <qt/execrpccommand.h>
 #include <qt/sendcoinsdialog.h>
+#include <qt/addresstablemodel.h>
+#include <qt/walletmodel.h>
 
 namespace AddDelegation_NS
 {
@@ -169,6 +171,16 @@ void AddDelegationPage::reject()
 void AddDelegationPage::show()
 {
     ui->lineEditStakerName->setFocus();
+    int j = ui->lineEditAddress->count();
+    for (int i = 0; i < j; i++) {
+        QString sAddress = ui->lineEditAddress->itemText(i);
+        QString sAddressTrim = sAddress.mid(0, 34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
+        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString fAddress = sAddressAndLabel.toUtf8().constData();
+        QString fAddressRemove = fAddress.remove("()");
+        ui->lineEditAddress->setItemText(i,fAddressRemove);
+    }
     QDialog::show();
 }
 

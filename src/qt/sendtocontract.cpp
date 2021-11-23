@@ -22,6 +22,7 @@
 #include <qt/sendcoinsdialog.h>
 #include <QClipboard>
 #include <interfaces/node.h>
+#include <qt/addresstablemodel.h>
 
 namespace SendToContract_NS
 {
@@ -109,6 +110,7 @@ SendToContract::SendToContract(const PlatformStyle *platformStyle, QWidget *pare
     connect(ui->lineEditContractAddress, &QValidatedLineEdit::textChanged, this, &SendToContract::on_updateSendToContractButton);
     connect(ui->textEditInterface, &QValidatedTextEdit::textChanged, this, &SendToContract::on_newContractABI);
     connect(ui->stackedWidget, &QStackedWidget::currentChanged, this, &SendToContract::on_updateSendToContractButton);
+    connect(ui->lineEditSenderAddress, &QComboBox::currentTextChanged, this,&SendToContract::on_updateSendToContractButton);
     connect(m_ABIFunctionField, &ABIFunctionField::functionChanged, this, &SendToContract::on_functionChanged);
     connect(ui->saveInfoButton, &QToolButton::clicked, this, &SendToContract::on_saveInfoClicked);
     connect(ui->loadInfoButton, &QToolButton::clicked, this, &SendToContract::on_loadInfoClicked);
@@ -274,6 +276,16 @@ void SendToContract::on_gasInfoChanged(quint64 blockGasLimit, quint64 minGasPric
 void SendToContract::on_updateSendToContractButton()
 {
     int func = m_ABIFunctionField->getSelectedFunction();
+    int j = ui->lineEditSenderAddress->count();
+    for (int i = 0; i < j; i++) {
+        QString sAddress = ui->lineEditSenderAddress->itemText(i);
+        QString sAddressTrim = sAddress.mid(0, 34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddressTrim);
+        QString sAddressAndLabel = sAddressTrim + QString(" (") +  sAddressLabel + QString(")") ;
+        QString fAddress = sAddressAndLabel.toUtf8().constData();
+        QString fAddressRemove = fAddress.remove("()");
+        ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
+    }
     bool enabled = func >= -1;
     if(ui->lineEditContractAddress->text().isEmpty())
     {
