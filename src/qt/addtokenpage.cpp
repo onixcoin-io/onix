@@ -130,6 +130,15 @@ void AddTokenPage::on_confirmButton_clicked()
 void AddTokenPage::on_addressChanged()
 {
     QString tokenAddress = ui->lineEditContractAddress->text();
+    int j = ui->lineEditSenderAddress->count();
+    for (int i = 0; i < j; i++) {
+        QString sAddress = ui->lineEditSenderAddress->itemText(i).mid(0,34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
+        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
+        QString fAddress = sAddressAndLabel.toUtf8().constData();
+        QString fAddressRemove = fAddress.remove("()");
+        ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
+    }
     if(m_tokenABI)
     {
         m_tokenABI->setAddress(tokenAddress.toStdString());
@@ -148,15 +157,6 @@ void AddTokenPage::on_addressChanged()
 void AddTokenPage::on_updateConfirmButton()
 {
     bool enabled = true;
-    int j = ui->lineEditSenderAddress->count();
-    for (int i = 0; i < j; i++) {
-        QString sAddress = ui->lineEditSenderAddress->itemText(i).mid(0,34);
-        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
-        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
-        QString fAddress = sAddressAndLabel.toUtf8().constData();
-        QString fAddressRemove = fAddress.remove("()");
-        ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
-    }
     if(ui->lineEditTokenName->text().isEmpty())
     {
         enabled = false;
