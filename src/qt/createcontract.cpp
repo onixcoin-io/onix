@@ -90,6 +90,7 @@ CreateContract::CreateContract(const PlatformStyle *platformStyle, QWidget *pare
     connect(ui->pushButtonClearAll, &QPushButton::clicked, this, &CreateContract::on_clearAllClicked);
     connect(ui->pushButtonCreateContract, &QPushButton::clicked, this, &CreateContract::on_createContractClicked);
     connect(ui->textEditBytecode, &QValidatedTextEdit::textChanged, this, &CreateContract::on_updateCreateButton);
+    connect(ui->textEditBytecode, &QValidatedTextEdit::textChanged, this, &CreateContract::on_updateByteCode);
     connect(ui->lineEditSenderAddress, &QComboBox::currentTextChanged, this,&CreateContract::on_updateCreateButton);
     connect(ui->textEditInterface, &QValidatedTextEdit::textChanged, this, &CreateContract::on_newContractABI);
     connect(ui->stackedWidget, &QStackedWidget::currentChanged, this, &CreateContract::on_updateCreateButton);
@@ -242,6 +243,16 @@ void CreateContract::on_gasInfoChanged(quint64 blockGasLimit, quint64 minGasPric
 void CreateContract::on_updateCreateButton()
 {
     bool enabled = true;
+    if(ui->textEditBytecode->toPlainText().isEmpty())
+    {
+        enabled = false;
+    }
+    enabled &= ui->stackedWidget->currentIndex() == 0;
+    ui->pushButtonCreateContract->setEnabled(enabled);
+}
+
+void CreateContract::on_updateByteCode()
+{
     int j = ui->lineEditSenderAddress->count();
     for (int i = 0; i < j; i++) {
         QString sAddress = ui->lineEditSenderAddress->itemText(i).mid(0,34);
@@ -251,13 +262,6 @@ void CreateContract::on_updateCreateButton()
         QString fAddressRemove = fAddress.remove("()");
         ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
     }
-    if(ui->textEditBytecode->toPlainText().isEmpty())
-    {
-        enabled = false;
-    }
-    enabled &= ui->stackedWidget->currentIndex() == 0;
-
-    ui->pushButtonCreateContract->setEnabled(enabled);
 }
 
 void CreateContract::on_newContractABI()

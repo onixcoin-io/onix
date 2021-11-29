@@ -194,15 +194,6 @@ void CallContract::on_updateCallContractButton()
 {
     int func = m_ABIFunctionField->getSelectedFunction();
     bool enabled = func != -1;
-    int j = ui->lineEditSenderAddress->count();
-    for (int i = 0; i < j; i++) {
-        QString sAddress = ui->lineEditSenderAddress->itemText(i).mid(0,34);
-        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
-        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
-        QString fAddress = sAddressAndLabel.toUtf8().constData();
-        QString fAddressRemove = fAddress.remove("()");
-        ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
-    }
     if(ui->lineEditContractAddress->text().isEmpty())
     {
         enabled = false;
@@ -277,11 +268,29 @@ void CallContract::on_loadInfoClicked()
 
 void CallContract::on_pasteAddressClicked()
 {
+    int j = ui->lineEditSenderAddress->count();
+    for (int i = 0; i < j; i++) {
+        QString sAddress = ui->lineEditSenderAddress->itemText(i).mid(0,34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
+        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
+        QString fAddress = sAddressAndLabel.toUtf8().constData();
+        QString fAddressRemove = fAddress.remove("()");
+        ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
+    }
     setContractAddress(QApplication::clipboard()->text());
 }
 
 void CallContract::on_contractAddressChanged()
 {
+    int j = ui->lineEditSenderAddress->count();
+    for (int i = 0; i < j; i++) {
+        QString sAddress = ui->lineEditSenderAddress->itemText(i).mid(0,34);
+        QString sAddressLabel = m_model->getAddressTableModel()->labelForAddress(sAddress);
+        QString sAddressAndLabel = sAddress + QString(" (") +  sAddressLabel + QString(")") ;
+        QString fAddress = sAddressAndLabel.toUtf8().constData();
+        QString fAddressRemove = fAddress.remove("()");
+        ui->lineEditSenderAddress->setItemText(i,fAddressRemove);
+    }
     if(isValidContractAddress() && m_contractModel)
     {
         QString contractAddress = ui->lineEditContractAddress->text();

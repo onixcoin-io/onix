@@ -37,6 +37,7 @@ public Q_SLOTS:
     void on_gasInfoChanged(quint64 blockGasLimit, quint64 minGasPrice, quint64 nGasPrice);
     void on_updateCreateButton();
     void on_newContractABI();
+    void on_updateByteCode();
 
 private Q_SLOTS:
     void updateDisplayUnit();
