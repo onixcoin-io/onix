@@ -124,7 +124,7 @@ void OptionsModel::Init(bool resetSettings)
 #endif
 
     if (!settings.contains("fLogEvents"))
-        settings.setValue("fLogEvents", fLogEvents);
+        settings.setValue("fLogEvents", true);
     if (!m_node.softSetBoolArg("-logevents", settings.value("fLogEvents").toBool()))
         addOverriddenOption("-logevents");
 
