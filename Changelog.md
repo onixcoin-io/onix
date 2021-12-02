@@ -1,17 +1,39 @@
+
+# Onix Core Changelog
+
 This document describes breaking changes between Onix releases for both RPC APIs and for blockchain consensus.
 
-# Sparknet (Testnet v1)
+## [0.1.2] - 2021-12-02
 
-Initial release
+- Removed `super staking` enabled by default.
+- Kept `log events` enabled by default.
+- Fixed disabled checkboxes for `log events` and `super staking` on the options dialog: 
+  they can be toggled on/off now.
+- Removed pruning message when starting from scratch.
+- Added labels to address selectors on the Delegation and SuperStaker addition dialogs.
+- Added labels to sender address selectors on the smart contracts pages.  
+  **Note:** labels are added as soon as the first input at the top of each page is modified.
 
-# TBD (Testnet v2)
+**Notes:**
 
-## Consensus Parameters/Rules
+- Since `super staking` was previously enabled by default, it is most likely that it will be
+  kept on after applying this update. To make sure the options are properly set, you should
+  open the options dialog and click on the "Reset options" button.  
+  If you want to proceed with this, you might get an error.  
+  [Please check this issue](https://github.com/onixcoin-io/onix/issues/2) for a workaround.
 
-## EVM Behavior
+## [0.1.1] - 2021-11-03
 
-* Made block.coinbase use block.vtx[1].vout[1] for the coinbase address of PoS blocks
-* Added check to coinbase to ensure that it is 0 if not a standard pubkeyhash address
+- Updated `minimumchainwork`
+- Updated `chainTXData`
+- Fixed wrong GitHub repository name
 
-## RPC APIs
+## [0.1.0] - 2021-10-31
+
+Initial release.
+
+**Notes:**
+
+- `log events` is enabled by default.
+- `super staking` is enabled by default.
 
