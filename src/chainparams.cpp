@@ -108,10 +108,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000005cf4d2a9967825033"); // onix
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000015a70618834be8c670"); // onix
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x575759bf1729417489c58808bf9ffd42bc72aba8ade6546aafed51a83cbdc394"); // 5000
+        consensus.defaultAssumeValid = uint256S("0x12f48de0bd5fe00fafaeb3afe78409e007b623e40ed6ac221fb6637cbca09309"); // 55000
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -167,15 +167,16 @@ public:
             {
                 { 0, uint256S("000041efdab032cc5a63ae0a98798867e57120e171940d2389693361fb51b70f")},
                 {5000, uint256S("575759bf1729417489c58808bf9ffd42bc72aba8ade6546aafed51a83cbdc394")},
+                {54787, uint256S("12f48de0bd5fe00fafaeb3afe78409e007b623e40ed6ac221fb6637cbca09309")},
             }
         };
 
         chainTxData = ChainTxData{
-            // Data as of block d282832401a02608ee95d7481de4bcc942c8ce3fdfb77ef33a4b7b3050f09703 (height 5050)
-            1635807312, // * UNIX timestamp of last known number of transactions
-            9623, // * total number of transactions between genesis and that timestamp
+            // Data as of block c1a9925e96c2bd10b91c6f392544ce03a66bcdb87aef892d48d4f8bed6e96836 (height 55000)
+            1639622216, // * UNIX timestamp of last known number of transactions
+            111221, // * total number of transactions between genesis and that timestamp
             //   (the tx=... number in the SetBestChain debug.log lines)
-            0.002747935264893 // * estimated number of transactions per second after that timestamp
+            0.01520075836369 // * estimated number of transactions per second after that timestamp
         };
 
         consensus.nBlocktimeDownscaleFactor = 4;
