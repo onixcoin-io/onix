@@ -3,6 +3,17 @@
 
 This document describes breaking changes between Onix releases for both RPC APIs and for blockchain consensus.
 
+## [0.2.0] - 2021-15-15
+
+- Fork inflicted on block #54786 to undo the steal of 2m+ coins after hack at Blockchain Financial,  
+  the platform where we are integrating services and directing the GRWI/ONIX swap.  
+  More information about this on:
+  - [Announcement of the intrusion at Blockchain Financial](https://blockchainfinancial.com/instrussion-dec-2021)
+  - [Announcement on the Onix website regarding the decision that led to this fork](https://onixcoin.io/important-announcement)
+- Bumped protocol and wallet version.
+- Updated minimumchainwork and checkpoints.
+
+
 ## [0.1.2] - 2021-12-02
 
 - Removed `super staking` enabled by default.
