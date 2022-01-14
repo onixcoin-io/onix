@@ -243,10 +243,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00"); // onix
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000029174d231ced640696"); // onix
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x00"); 
+        consensus.defaultAssumeValid = uint256S("0xd32e791cbfe28f24f70fc6fcf628f73fb5e1bfee64cece81511a6cc4635fca8e"); 
 
         pchMessageStart[0] = 0x5c;
         pchMessageStart[1] = 0x4d;
@@ -287,14 +287,15 @@ public:
         checkpointData = {
             {
                 {0, uint256S("0000fa4c0f79fce1cd4ce2906b280e869f158c5051e8f2192b629cf08cfa2448")},
+                {10000, uint256S("d32e791cbfe28f24f70fc6fcf628f73fb5e1bfee64cece81511a6cc4635fca8e")},
             }
         };
 
         chainTxData = ChainTxData{
-            // Data as of block c2e57a5f716d7a80d2590057899c0cca11afa2aabaf54a84413b396d92631847 (height 5050)
-            0,
-            0,
-            0
+            // Data as of block d32e791cbfe28f24f70fc6fcf628f73fb5e1bfee64cece81511a6cc4635fca8e (height 10000)
+            1642062388,
+            19001,
+            0.03541167304731621
         };
 
         consensus.nBlocktimeDownscaleFactor = 4;
