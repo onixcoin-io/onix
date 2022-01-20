@@ -3,6 +3,11 @@
 
 This document describes breaking changes between Onix releases for both RPC APIs and for blockchain consensus.
 
+## [0.2.1] - 2022-01-19
+
+- Updated testnet params, chaindata and checkpoints.
+- Added `getcontractcode` RPC API method.
+
 ## [0.2.0] - 2021-15-15
 
 - Fork inflicted on block #54786 to undo the steal of 2m+ coins after hack at Blockchain Financial,  
